@@ -12,11 +12,13 @@ define([
      * widget will have a todo
      */
 
-    return declare([_WidgetBase, _TemplatedMixin], {
+    let todoWidget = declare([_WidgetBase, _TemplatedMixin], {
+        _todoCounterInt : 0,
         templateString: template,
         postCreate : function () {
             this.checkbox.checked = !!this.done;
             this.textContent.value = (this.text || "");
+            this.storageLb.innerText = this.storageKey;
         },
         toStorageString : function () {
             return {
@@ -25,10 +27,17 @@ define([
             }
         },
         onSaveRequired : function () {
-            localStorage[this.storageKey]
+            localStorage[this.storageKey] = JSON.stringify(this.toStorageString());
         },
         addSubTodo : function () {
-
+            var todo = new todoWidget({
+                text : "",
+                done : false,
+                storageKey :  this.storageKey + this._todoCounterInt
+            });
+            todo.placeAt(this.subtodoarea);
+            this._todoCounterInt ++;
         }
     });
+    return todoWidget;
 });
