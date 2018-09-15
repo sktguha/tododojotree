@@ -28,15 +28,17 @@ define([
         },
         restoreFromStorageMainTODOS : function () {
             //so get all numberic ones. those are the initial ones
-            _(Object.keys(localStorage)).filter(function(key){
+            this.todoCounter = _(Object.keys(localStorage)).chain().filter(function(key){
                 return _.isFinite(key*1)
-            }).forEach(function (key) {
+            }).sortBy(function (key) {
+                return key*1;
+            }).each(function (key) {
                 var todo = new TodoWidget({
                     storageKey : key,
                     restoreFromStorage : true
                 });
                 todo.placeAt(this.todoList);
-            }.bind(this))
+            }.bind(this)).max().value() * 1 + 1;
 
         }
     });
