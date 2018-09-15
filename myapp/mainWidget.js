@@ -28,7 +28,7 @@ define([
         },
         restoreFromStorageMainTODOS : function () {
             //so get all numberic ones. those are the initial ones
-            this.todoCounter = _(Object.keys(localStorage)).chain().filter(function(key){
+            let ctVal = _(Object.keys(localStorage)).chain().filter(function(key){
                 return _.isFinite(key*1)
             }).sortBy(function (key) {
                 return key*1;
@@ -38,7 +38,10 @@ define([
                     restoreFromStorage : true
                 });
                 todo.placeAt(this.todoList);
-            }.bind(this)).max().value() * 1 + 1;
+            }.bind(this)).max().value();
+            if(_.isFinite(ctVal*1)){
+                this.todoCounter = ctVal * 1 + 1;
+            }
 
         }
     });
