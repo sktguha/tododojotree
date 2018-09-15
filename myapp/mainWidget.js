@@ -34,8 +34,9 @@ define([
                 var todo = new TodoWidget({
                     storageKey : key,
                     restoreFromStorage : true
-                })
-            })
+                });
+                todo.placeAt(this.todoList);
+            }.bind(this))
 
         }
     });
