@@ -57,11 +57,12 @@ define([
         },
         addSubTodo : function () {
             var todo = new TodoWidget({
-                storageKey: this.storageKey + this.childCount,
+                storageKey: this.storageKey + "|" + this.childCount,
                 restoreFromStorage : false
             });
             todo.placeAt(this.subtodoarea);
             this.childCount++;
+            this.onSaveRequired();
         }
     });
     return TodoWidget;
