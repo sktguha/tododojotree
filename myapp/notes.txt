@@ -43,3 +43,18 @@ for that hv to make sure 11 is done before 110 and all.
 ----store logic-----
 store is simple. each tod stores seperately in LS. and we also add in the special div area
 no point in maintaining a todolist for now
+
+so regd the restore ?? give tod a flag or full args ??
+better to tell tod to restore itself. and that way it will trigger its children
+
+ok if restore case, then we give
+
+restoreFromStorage : true,
+storageKey :
+childrencount :
+
+else we give
+restoreFromStorage : false.
+storageKey :
+
+childrenCount defaults to zero

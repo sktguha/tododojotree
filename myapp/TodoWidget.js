@@ -16,14 +16,25 @@ define([
         _todoCounterInt : 0,
         templateString: template,
         postCreate : function () {
-            this.checkbox.checked = !!this.done;
-            this.textContent.value = (this.text || "");
-            this.storageLb.innerText = this.storageKey;
+            if(this.restoreFromStorage === true){
+                this.restoreFromStorageTodoWidget();
+            } else {
+                this.checkbox.checked = !!this.done;
+                this.textContent.value = (this.text || "");
+                this.storageLb.innerText = this.storageKey;
+                this.onSaveRequired(); //save on start to avoid the missing parent cases
+            }
+        },
+        restoreFromStorageTodoWidget : function () {
+            // for(var i=0;i<this.childCount;i++){
+            //     var stKey = this.storageKey + i;
+            // }
         },
         toStorageString : function () {
             return {
                 done : this.checkbox.checked,
-                text : this.textContent.value
+                text : this.textContent.value,
+                childCount : this._todoCounterInt
             }
         },
         onSaveRequired : function () {
@@ -31,12 +42,11 @@ define([
         },
         addSubTodo : function () {
             var todo = new todoWidget({
-                text : "",
-                done : false,
-                storageKey :  this.storageKey + this._todoCounterInt
+                storageKey: this.storageKey + this._todoCounterInt,
+                restoreFromStorage : false
             });
             todo.placeAt(this.subtodoarea);
-            this._todoCounterInt ++;
+            this._todoCounterInt++;
         }
     });
     return todoWidget;
