@@ -1,0 +1,45 @@
+so simple td app
+so td is like done, a check box, then the text content
+
+we render a widget. i.e give in its constructor
+
+new td({
+done : false,
+text : "content"
+})
+
+and append to the body
+
+so app is also a widget
+
+it will listen to click on plus button and add an widget to body
+that's it. user can write the td. on any change such
+we can take out one event to write in storage
+
+
+
+now issue is of multiple tds. so the todo widget has a array of todo widgets inside it
+and each points. so as soon as we add the + on add sub todo
+then it gets added as sub and we add to another special area on the div so we have a seperation
+i.e td1 - todochildren gets added to that special div
+
+now about storage. we can store as tree. but issue is with balancing it and updating the
+stores.
+
+ok so for now pass identifier. the next ones will pass on the storageprefix to the children
+and for storage simple one
+
+
+on start pass storage key as 0,1,2 etc
+then on add sub td, pass the appended ones
+
+----- restore logic ----
+on init. from LS add to the main ones.
+then for each of the numbers, find them from map and add
+for that hv to make sure 11 is done before 110 and all.
+------------------------
+
+
+----store logic-----
+store is simple. each tod stores seperately in LS. and we also add in the special div area
+no point in maintaining a todolist for now
