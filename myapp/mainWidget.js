@@ -28,8 +28,9 @@ define([
         },
         restoreFromStorageMainTODOS : function () {
             //so get all numberic ones. those are the initial ones
-            _.filter(Object.keys(localStorage), _.isFinite).forEach(function (key) {
-                var val = localStorage[key];
+            _(Object.keys(localStorage)).filter(function(key){
+                return _.isFinite(key*1)
+            }).forEach(function (key) {
                 var todo = new TodoWidget({
                     storageKey : key,
                     restoreFromStorage : true
