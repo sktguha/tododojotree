@@ -29,7 +29,7 @@ define([
             }
         },
         restoreFromStorageTodoWidget : function () {
-            var val = localStorage[this.storageKey];
+            var val = JSON.parse(localStorage[this.storageKey]);
             this.done = val.done;
             this.text = val.text;
             this.childCount = val.childCount;
